@@ -1,10 +1,3 @@
--- =========================================================================
--- SYSTEM: Football Ticket Booking System Database Setup Template
--- DESCRIPTION: Pseudo-DDL Template for Table Creation & Data Insertion
--- INSTRUCTIONS: Replace 'TYPE' and the constraint placeholders with your own
---               actual data types, relational keys, and check criteria.
--- =========================================================================
-
 -- DROP TABLES IF THEY ALREADY EXIST TO PREVENT CONFLICTS
 DROP TABLE IF EXISTS Bookings;
 DROP TABLE IF EXISTS Matches;
@@ -14,15 +7,18 @@ DROP TABLE IF EXISTS Users;
 -- 1. CREATE USERS TABLE
 -- =========================================================================
 CREATE TABLE Users (
-    user_id TYPE,
-    full_name TYPE,
-    email TYPE,
-    role TYPE,
-    phone_number TYPE,
+    user_id SERIAL,
+    full_name VARCHAR(80) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    role VARCHAR(20) NOT NULL,
+    phone_number VARCHAR(20),
     
     -- Write your constraint to make 'user_id' the Primary Key
+    PRIMARY KEY(user_id)
     -- Write your constraint to ensure 'email' values are never duplicated
+    UNIQUE(email)
     -- Write your check constraint to restrict 'role' to specific allowed strings
+    CHECK (role IN ('Ticket Manager', 'Football Fan'))
 );
 
 -- =========================================================================
