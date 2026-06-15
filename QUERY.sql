@@ -18,22 +18,25 @@ CREATE TABLE Users (
     -- Write your constraint to ensure 'email' values are never duplicated
     UNIQUE(email)
     -- Write your check constraint to restrict 'role' to specific allowed strings
-    CHECK (role IN ('Ticket Manager', 'Football Fan'))
+    CHECK(role IN ('Ticket Manager', 'Football Fan'))
 );
 
 -- =========================================================================
 -- 2. CREATE MATCHES TABLE
 -- =========================================================================
 CREATE TABLE Matches (
-    match_id TYPE,
-    fixture TYPE,
-    tournament_category TYPE,
-    base_ticket_price TYPE,
-    match_status TYPE,
+    match_id SERIAL,
+    fixture VARCHAR(200) NOT NULL,
+    tournament_category VARCHAR(100) NOT NULL,
+    base_ticket_price INT NOT NULL,
+    match_status VARCHAR(30) NOT NULL,
     
     -- Write your constraint to make 'match_id' the Primary Key
+    PRIMARY KEY(match_id),
     -- Write your check constraint to prevent negative ticket prices
+    CHECK(base_ticket_price >= 0),
     -- Write your check constraint to restrict 'match_status' values
+    CHECK(match_status IN ('Available', 'Selling Fast', 'Sold Out', 'Postponed'))
 );
 
 -- =========================================================================
